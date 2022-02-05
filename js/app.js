@@ -1,20 +1,16 @@
 "use strict";
 
-let scrollArrow = document.querySelector(".mainblock__arrow[data-goto]");
-if (scrollArrow) scrollArrow.addEventListener("click", onMenuLinkClick);
+// Прокрутка по клику
+// Для прокрутки добавить к нужному элементу атрибут data-goto, его значение будет назначением прокрутки
 
-const menuLinks = document.querySelectorAll(".menu__link[data-goto]");
-if (menuLinks.length > 0) {
-    menuLinks.forEach((menuLink) => {
-        menuLink.addEventListener("click", onMenuLinkClick);
-    });
-}
+document.addEventListener("click", scrollToElem);
 
-function onMenuLinkClick(e) {
-    let menuLink = e.target;
-    if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
-        let gotoBlock = document.querySelector(menuLink.dataset.goto);
-        let gotoBlockValue = gotoBlock.getBoundingClientRect().top + scrollY;
+function scrollToElem(e) {
+    const targetElem = e.target;
+    if (targetElem.dataset.goto && document.querySelector(targetElem.dataset.goto)) {
+        const gotoBlock = document.querySelector(targetElem.dataset.goto);
+        const gotoBlockValue = gotoBlock.getBoundingClientRect().top + scrollY;
+
         window.scrollTo({
             top: gotoBlockValue,
             behavior: "smooth",
@@ -22,3 +18,5 @@ function onMenuLinkClick(e) {
         e.preventDefault();
     }
 }
+
+// Прокрутка по клику
